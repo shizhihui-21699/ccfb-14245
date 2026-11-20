@@ -1,0 +1,25 @@
+{
+  "name": "fingerprint-sandbox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Per-site coherent browser fingerprint virtualization (MV3 extension) + adversarial fingerprint test lab",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:watch": "node scripts/build.mjs --watch",
+    "build:test": "node scripts/build-tests.mjs",
+    "serve": "node scripts/serve.mjs",
+    "lab": "node tests/support/server.mjs",
+    "compare": "node scripts/build.mjs && node scripts/compare.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/build.mjs && node scripts/build-tests.mjs && node --test tests/unit/ tests/e2e/",
+    "test:unit": "node scripts/build-tests.mjs && node --test tests/unit/",
+    "test:e2e": "node scripts/build.mjs && node --test tests/e2e/"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.32",
+    "esbuild": "^0.25.0",
+    "puppeteer-core": "^24.10.0",
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fingerprint Lab</title>
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Fingerprint Lab</h1>
+      <p class="sub">Adversarial consistency checks for a virtualised browser fingerprint.</p>
+    </div>
+    <div class="actions">
+      <button id="run" class="primary">Run full scan</button>
+      <button id="baseline">Scan without extension (baseline)</button>
+      <button id="diff" disabled>Diff with previous run</button>
+    </div>
+  </header>
+
+  <section id="verdict" class="verdict" hidden>
+    <div class="score">
+      <span id="score-critical" class="pill critical">0 critical</span>
+      <span id="score-high" class="pill high">0 high</span>
+      <span id="score-medium" class="pill medium">0 medium</span>
+      <span id="score-low" class="pill low">0 low</span>
+    </div>
+    <p id="verdict-text"></p>
+  </section>
+
+  <section id="findings-section" hidden>
+    <h2>Findings</h2>
+    <p class="hint">Each finding pairs two independent observations that cannot both be true on real hardware.</p>
+    <div id="findings" class="findings"></div>
+  </section>
+
+  <section id="diff-section" hidden>
+    <h2>Changes since previous run</h2>
+    <div id="diff-out" class="diff"></div>
+  </section>
+
+  <section>
+    <h2>Collected fingerprint</h2>
+    <p class="hint">Raw values as a tracker would see them, grouped by source.</p>
+    <div id="panel" class="panel"></div>
+  </section>
+
+  <section>
+    <h2>Context consistency</h2>
+    <p class="hint">
+      The same collection run from a Worker, from a same-origin iframe, and from the top window.
+      A tracker does this because defences often miss one realm.
+    </p>
+    <div id="contexts" class="panel"></div>
+  </section>
+
+  <footer>
+    <p>
+      This page is a test instrument, not a tracker: it keeps everything in memory,
+      sends nothing anywhere, and stores nothing.
+    </p>
+  </footer>
+
+  <script src="lab.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fingerprint Sandbox — options</title>
+  <style>
+    :root { color-scheme: light dark; --fg: #1a1a1a; --muted: #666; --bg: #fff; --line: #ddd; --accent: #0b6bcb; --warn: #b45309; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e8e8e8; --muted: #9a9a9a; --bg: #161616; --line: #333; --accent: #6aa9ff; --warn: #f0b35e; }
+    }
+    body { font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { font-size: 20px; margin: 0 0 4px; }
+    .sub { color: var(--muted); margin: 0 0 28px; }
+    section { border-top: 1px solid var(--line); padding: 20px 0; }
+    h2 { font-size: 15px; margin: 0 0 10px; }
+    dl { display: grid; grid-template-columns: minmax(140px, max-content) 1fr; gap: 6px 16px; margin: 0; }
+    dt { color: var(--muted); }
+    dd { margin: 0; font-variant-numeric: tabular-nums; }
+    code { font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    button { font: inherit; padding: 7px 14px; border-radius: 7px; border: 1px solid var(--line);
+             background: transparent; color: var(--fg); cursor: pointer; }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    .note { color: var(--muted); font-size: 13px; }
+    .warn { color: var(--warn); }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-weight: 600; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>Fingerprint Sandbox</h1>
+  <p class="sub">Per-site, internally consistent fingerprint virtualisation.</p>
+
+  <section>
+    <h2>Current site profile</h2>
+    <p class="note" id="site-note">Open a tab on the site you are researching; its profile appears here.</p>
+    <dl id="profile"></dl>
+    <div class="row" style="margin-top:14px">
+      <button id="open-lab">Open the test lab</button>
+      <button id="rotate">Rotate this site's profile</button>
+    </div>
+    <p class="note" id="rotate-note"></p>
+  </section>
+
+  <section>
+    <h2>Seed</h2>
+    <dl>
+      <dt>Install salt</dt><dd><code id="salt">—</code></dd>
+      <dt>Build seed</dt><dd><code id="build-seed">—</code></dd>
+      <dt>Build id</dt><dd><code id="build-id">—</code></dd>
+    </dl>
+    <p class="note">
+      The install salt is random per installation and never leaves the browser. The derived
+      fingerprint seed is <code>PRF(buildSeed, installSalt)</code>, so two installs of this
+      same build never share a fingerprint on the same site.
+    </p>
+    <div class="row" style="margin-top:12px">
+      <button id="reset">Reset install (new salt)</button>
+    </div>
+    <p class="note warn" id="reset-note"></p>
+  </section>
+
+  <section>
+    <h2>What is virtualised</h2>
+    <table>
+      <thead><tr><th>Source</th><th>How</th></tr></thead>
+      <tbody id="matrix"></tbody>
+    </table>
+  </section>
+
+  <script src="options.js"></script>
+</body>
+</html>
